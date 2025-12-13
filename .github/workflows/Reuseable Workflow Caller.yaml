@@ -14,7 +14,7 @@ jobs:
 
   call-reusable-workflow-phoritus:
     name: Invoke reusable workflow with phoritus
-    uses: Phoritus/Java-Problem/.github/workflows/Reuseable Workflow Source.yaml
+    uses: Phoritus/Java-Problem/.github/workflows/Reuseable Workflow Source.yaml@cf61aff531920001763e4be377df69125338f109
     with:
       foo: "bar"
       environment: production
