@@ -20,7 +20,7 @@ jobs:
 
       - name: Attempt to create a PR
         run: |
-          gh pr edit 1 --add-labels "test-label"
+          gh pr edit 1 --add-label "test-label"
         
       - name: Confirm the failure
         if: failure()
@@ -39,7 +39,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr edit 1 --add-labels "test-label"
+          gh pr edit 1 --add-label "test-label"
       
       - name: Confirm the success
         if: success()
