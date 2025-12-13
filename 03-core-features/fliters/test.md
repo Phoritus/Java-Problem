@@ -19,3 +19,5 @@ hello_world()
 ```
 
 This file can be used for testing Markdown rendering or as a template for new documentation.
+
+It would be trigger on push event
