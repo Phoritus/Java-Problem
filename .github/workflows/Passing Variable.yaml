@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       foo: ${{ steps.set-output.outputs.foo }}
+      foo_upper: ${{ steps.set-output.outputs.foo }}
     steps:
       - name: Set output
         id: set-output
@@ -30,4 +31,4 @@ jobs:
       - name: Inspect values inside consumer
         run: |
           echo "foo (set via GITHUB_OUTPUT): ${{ needs.Producer.outputs.foo }}"
-          echo "FOO (set via GITHUB_ENV): ${FOO:-<UNSET>}"
+          echo "FOO (set via GITHUB_ENV): ${{ needs.Producer.outputs.foo_upper }}"
