@@ -13,9 +13,9 @@ jobs:
         run: |
           foo=bar
 
-          echo "foo=${foo}" >> $GITHUB_OUTPUT
+          echo "foo=${foo}" >> "$GITHUB_OUTPUT"
 
-          echo "FOO=${foo}" >> $GITHUB_ENV
+          echo "FOO=${foo}" >> "$GITHUB_ENV"
 
       - name: Inspect values inside producer
         run: |
