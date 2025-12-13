@@ -28,6 +28,10 @@ jobs:
         if: ${{! (matrix.number == 2 && matrix.letter == 'c')}}
         run: echo "✅ This step runs for ${{ matrix.number }}-${{ matrix.letter }}"
 
+      - name: Force failure
+        if: ${{ matrix.number == 2 && matrix.letter == 'b'}}
+        run: exit 1
+
   
   sleep-job:
     runs-on: ubuntu-latest
