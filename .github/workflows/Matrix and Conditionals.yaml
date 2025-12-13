@@ -1,0 +1,37 @@
+name: Matrix and Conditionals
+on: workflow_dispatch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  matrix-job:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        number: [1, 2]
+        letter: [a, b, c]
+        exclude:
+          - number: 1
+            letter: c
+    timeout-minutes: 5
+
+    steps:
+      - name: Print matrix values
+        run: |
+          echo "Number: ${{ matrix.number }}"
+          echo "Letter: ${{ matrix.letter }}"
+      
+      - name: Run everywhere except 2c
+        if: ${{! (matrix.number == 2 && matrix.letter == 'c')}}
+        run: echo "✅ This step runs for ${{ matrix.number }}-${{ matrix.letter }}"
+
+  
+  sleep-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sleep for 60 seconds
+        run: sleep 60
+        timeout-minutes: 2
