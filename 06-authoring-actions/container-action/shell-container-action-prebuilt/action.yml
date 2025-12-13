@@ -1,0 +1,13 @@
+name: 'Shell Container Action'
+description: 'Greet someone from a prebuilt container'
+inputs:
+  who-to-greet:
+    description: 'Who to greet in the log'
+    required: true
+    default: 'World'
+outputs:
+  greeting:
+    description: 'The greeting output'
+runs:
+  using: 'docker'
+  image: 'docker://phoritus/shell-container-action:0.0.1'
