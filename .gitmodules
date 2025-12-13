@@ -3,4 +3,4 @@
 	url = https://github.com/actions/container-action.git
 [submodule "06-authoring-actions/typescript-actions/typescript-action-with-build"]
 	path = 06-authoring-actions/typescript-actions/typescript-action-with-build
-	url = https://github.com/actions/typescript-action.git
+	url = https://github.com/sidpalas/typescript-action-with-build.git
