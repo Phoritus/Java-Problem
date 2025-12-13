@@ -34,4 +34,4 @@ jobs:
           name: test-artifact
       - name: Print artifact
         run: |
-          cat test-artifact/hello.txt
+          cat artifact/hello.txt
