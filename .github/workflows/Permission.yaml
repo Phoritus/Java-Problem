@@ -1,0 +1,46 @@
+name: Permission
+on: workflow_dispatch
+
+
+jobs:
+  read-only-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read # Can only read PRs
+    continue-on-error: true # Avoid failure of the workflow
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: List the first 5 open PRs
+        run: |
+          gh pr list --limit 5
+
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Attempt to create a PR
+        run: |
+          gh pr edit 1 --add-labels "test-label"
+        
+      - name: Confirm the failure
+        if: failure()
+        run: echo "❌ Write permission failed as expected"
+
+  
+  read-write-pr:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Attempt to add a label (expected to succeed)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr edit 1 --add-labels "test-label"
+      
+      - name: Confirm the success
+        if: success()
+        run: echo "✅ Write permission succeeded as expected"
