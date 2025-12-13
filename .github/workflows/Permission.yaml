@@ -16,7 +16,7 @@ jobs:
           gh pr list --limit 5
 
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Attempt to create a PR
         run: |
@@ -37,7 +37,7 @@ jobs:
 
       - name: Attempt to add a label (expected to succeed)
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh pr edit 1 --add-label "test-label"
       
