@@ -1,0 +1,49 @@
+name: Caching
+on: workflow_dispatch
+
+jobs:
+  actions-cache:
+    name: Actions cache
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore cache
+        id: demo-cache
+        uses: actions/cache@v4
+        with:
+          path: demo-cache
+          key: demo-cache-v1
+        
+      - name: Populate cache directory
+        if: steps.demo-cache.outputs.cache-hit == 'false'
+        run: |
+          echo "Cache miss, populating cache directory..."
+          mkdir -p demo-cache
+          echo "This is a test cache" > demo-cache/hello.txt
+
+      - name: Verify cache status
+        run: |
+          echo "cache-hit: ${{ steps.demo-cache.outputs.cache-hit }}"
+          cat demo-cache/hello.txt
+
+  
+  node-cache:
+    name: npm dependencies cache
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 04-advanced-features/caching
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          # Point to the package.json file
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit
+
+      - name: List first few modules
+        run: |
+          ls -R node_modules | head
