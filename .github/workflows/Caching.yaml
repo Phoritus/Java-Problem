@@ -15,10 +15,10 @@ jobs:
         
       - name: Populate cache directory
         if: steps.demo-cache.outputs.cache-hit == 'false'
-        run: |
-          echo "Cache miss, populating cache directory..."
-          mkdir -p demo-cache
-          echo "This is a test cache" > demo-cache/hello.txt
+        uses: actions/cache@v4
+        with:
+          path: demo-cache
+          key: demo-cache-v1
 
       - name: Verify cache status
         run: |
