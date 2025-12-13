@@ -11,7 +11,7 @@ jobs:
       - name: Set output
         id: set-output
         run: |
-          foo=branches:
+          foo=bar
 
           echo "foo=${foo}" >> $GITHUB_OUTPUT
 
