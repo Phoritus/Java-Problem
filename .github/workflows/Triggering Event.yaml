@@ -1,0 +1,27 @@
+name: Triggering Event
+
+on:
+    push:
+        branches:
+          - "example-branch"
+    
+    pull_request:
+        types:
+          - opened
+          - synchronize
+          - reopened
+    
+        paths:
+          - "03-core-features/fliters/*.md"
+          - "!03-core-features/fliters/*.txt"
+
+    workflow_dispatch:
+
+jobs:
+  echo-event:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump full event JSON
+        run: |
+          echo "===> ${{ toJson(github.event) }}"
+          cat "$GITHUB_EVENT_PATH"
