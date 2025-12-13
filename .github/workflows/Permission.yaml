@@ -22,7 +22,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr edit 1 --add-label "documentation"
+          gh pr edit 6 --add-label "documentation"
         
       - name: Confirm the failure
         if: failure()
@@ -40,7 +40,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh pr edit 1 --add-label "documentation"
+          gh pr edit 6 --add-label "documentation"
       
       - name: Confirm the success
         if: success()
