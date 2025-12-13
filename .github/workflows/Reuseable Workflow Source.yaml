@@ -1,0 +1,35 @@
+name: Reusable Workflow Source
+
+on: 
+  workflow_call:
+    inputs:
+      foo:
+        required: true
+        type: string
+      environment:
+        description: 'Environment to run the workflow'
+        required: true
+        type: string
+    secrets:
+      EXAMPLE_REPOSITORY_SECRET:
+        required: true
+    
+jobs:
+  reusable-workflow-job:
+    environment: ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Job in reusable workflow
+        env:
+          FOO: ${{ inputs.foo }}
+
+          EXAMPLE_REPOSITORY_SECRET: ${{ secrets.EXAMPLE_REPOSITORY_SECRET}}
+          EXAMPLE_ENVIRONMENT_SECRET: ${{ secrets.EXAMPLE_ENVIRONMENT_SECRET}}
+          EXAMPLE_ENVIRONMENT_VARIABLE: ${{ vars.EXAMPLE_ENVIRONMENT_VARIABLE}}
+
+        run: |
+          echo "FOO: $FOO"
+          echo "EXAMPLE_REPOSITORY_SECRET: $EXAMPLE_REPOSITORY_SECRET"
+          echo "EXAMPLE_ENVIRONMENT_SECRET: $EXAMPLE_ENVIRONMENT_SECRET"
+          echo "EXAMPLE_ENVIRONMENT_VARIABLE: $EXAMPLE_ENVIRONMENT_VARIABLE"

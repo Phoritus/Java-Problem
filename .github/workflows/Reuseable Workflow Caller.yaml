@@ -1,0 +1,22 @@
+name: Reusable Workflow Caller
+
+on:
+  workflow_dispatch:
+
+jobs:
+  call-reusable-workflow:
+    name: Invoke reusable workflow with relative path
+    uses: ./.github/workflows/Reuseable Workflow Source.yaml
+    with:
+      foo: "bar"
+      environment: staging
+    secrets: inherit
+
+  call-reusable-workflow-phoritus:
+    name: Invoke reusable workflow with phoritus
+    uses: Phoritus/Java-Problem/.github/workflows/Reuseable Workflow Source.yaml
+    with:
+      foo: "bar"
+      environment: production
+    secrets:
+      EXAMPLE_REPOSITORY_SECRET: ${{ secrets.EXAMPLE_REPOSITORY_SECRET }}
