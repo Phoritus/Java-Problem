@@ -28,6 +28,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Inspect scopes job 2 step 2
+        env:
+          STEP_VAR: I_AM_STEP_SCOPED_JOB_2
+        run: |
+          echo "WORKFLOW_VAR: $WORKFLOW_VAR"
+          echo "JOB_VAR: ${JOB_VAR:-<UNSET>}"
+          echo "STEP_VAR: ${STEP_VAR:-<UNSET>}"
+      
+      - name: Inspect scopes job 2 step 2
         run: |
           echo "WORKFLOW_VAR: $WORKFLOW_VAR"
           echo "JOB_VAR: ${JOB_VAR:-<UNSET>}"
