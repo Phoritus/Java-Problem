@@ -30,6 +30,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: test-artifact
+          path: test-artifact
       - name: Print artifact
         run: |
           cat test-artifact/hello.txt
