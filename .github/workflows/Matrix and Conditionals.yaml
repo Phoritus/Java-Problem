@@ -9,7 +9,7 @@ jobs:
   matrix-job:
     runs-on: ubuntu-latest
     strategy:
-      fail-fast: false
+      fail-fast: true 
       matrix:
         number: [1, 2]
         letter: [a, b, c]
