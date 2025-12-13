@@ -14,11 +14,10 @@ jobs:
           key: demo-cache-v1
         
       - name: Populate cache directory
-        if: steps.demo-cache.outputs.cache-hit == 'false'
-        uses: actions/cache@v4
-        with:
-          path: demo-cache
-          key: demo-cache-v1
+        if: steps.demo-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p demo-cache
+          echo "Hello from cache" > demo-cache/hello.txt
 
       - name: Verify cache status
         run: |
