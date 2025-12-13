@@ -1,3 +1,6 @@
 [submodule "06-authoring-actions/container-action/shell-container-action"]
 	path = 06-authoring-actions/container-action/shell-container-action
 	url = https://github.com/actions/container-action.git
+[submodule "06-authoring-actions/typescript-actions/typescript-action-with-build"]
+	path = 06-authoring-actions/typescript-actions/typescript-action-with-build
+	url = https://github.com/actions/typescript-action.git
