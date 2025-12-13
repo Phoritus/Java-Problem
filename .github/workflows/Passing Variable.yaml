@@ -1,0 +1,33 @@
+name: Passing Variable
+on:
+  workflow_dispatch
+
+jobs:
+  Producer:
+    runs-on: ubuntu-latest
+    outputs:
+      foo: ${{ steps.set-output.outputs.foo }}
+    steps:
+      - name: Set output
+        id: set-output
+        run: |
+          foo=branches:
+
+          echo "foo=${foo}" >> $GITHUB_OUTPUT
+
+          echo "FOO=${foo}" >> $GITHUB_ENV
+
+      - name: Inspect values inside producer
+        run: |
+          echo "FOO (set via GITHUB_ENV): $FOO"
+          echo "foo (set via GITHUB_OUTPUT): ${{ steps.set-output.outputs.foo }}"
+  
+
+  Consumer:
+    runs-on: ubuntu-latest
+    needs: Producer
+    steps:
+      - name: Inspect values inside consumer
+        run: |
+          echo "FOO (set via GITHUB_ENV): ${FOO:-<UNSET>}"
+          echo "foo (set via GITHUB_OUTPUT): ${needs.Producer.outputs.foo:-<UNSET>}"
