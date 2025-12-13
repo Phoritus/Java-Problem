@@ -38,7 +38,7 @@ jobs:
           node-version: 20
           cache: npm
           # Point to the package.json file
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: 04-advanced-features/caching/package-lock.json
 
       - name: Install dependencies
         run: npm ci --prefer-offline --no-audit
